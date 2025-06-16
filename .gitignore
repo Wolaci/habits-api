@@ -1,0 +1,16 @@
+# Node
+node_modules/
+dist/
+.env
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# VSCode
+.vscode/
