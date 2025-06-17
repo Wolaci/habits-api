@@ -2,6 +2,8 @@ import { Router } from 'express';
 import { prisma } from '../prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { authMiddleware, AuthenticatedRequest } from '../middlewares/auth';
+
 
 
 const router = Router();
@@ -64,5 +66,21 @@ router.post('/login', async (req, res) => {
 
   return res.json({ token });
 });
+
+router.get('/profile', authMiddleware, async (req: AuthenticatedRequest, res) => {
+  const userId = req.userId;
+
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { id: true, name: true, email: true },
+  });
+
+  if (!user) {
+    return res.status(404).json({ message: 'Usuário não encontrado' });
+  }
+
+  return res.json(user);
+});
+
 
 export default router;
