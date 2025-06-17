@@ -13,8 +13,20 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
-
   progress  UserHabitProgress[]
+  dailyProgresses DailyProgress[]
+}
+
+model DailyProgress {
+  id        String   @id @default(uuid())
+  date      DateTime @unique
+  treino    Boolean
+  ingles    Boolean
+  estudo    Boolean
+  dieta     Boolean
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model UserHabitProgress {

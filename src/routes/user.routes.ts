@@ -8,8 +8,7 @@ import { authMiddleware, AuthenticatedRequest } from '../middlewares/auth';
 
 const router = Router();
 
-// Criar novo usuário
-router.post('/users', async (req, res) => {
+router.post('/register', async (req, res) => {
   const { body } = req;
 
   if (!body || typeof body !== 'object') {
