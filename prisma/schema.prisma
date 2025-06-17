@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  progress  UserHabitProgress[]
+}
+
+model UserHabitProgress {
+  id           String   @id @default(uuid())
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
+  date         DateTime
+  treino       Boolean  @default(false)
+  estudo       Boolean  @default(false)
+  ingles       Boolean  @default(false)
+  alimentacao  Boolean  @default(false)
+}

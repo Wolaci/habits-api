@@ -3,14 +3,23 @@ node_modules/
 dist/
 .env
 
-# Prisma
+# Prisma (SQLite e cliente)
 prisma/dev.db
 prisma/dev.db-journal
+/src/generated/         # se você for usar geração de código
+/src/generated/prisma   # específico do prisma se usado
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 
 # VSCode
 .vscode/
+
+# OS/Bash
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
